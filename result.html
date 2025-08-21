@@ -1,0 +1,74 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Result</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 60% 40%, #7ed6df 0%, #30336b 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .msg-container {
+      background: rgba(0,0,0,0.15);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+    .msg {
+      font-size: 2rem;
+      color: #fff;
+      text-shadow: 0 2px 8px #222;
+    }
+    #newbtn {
+      padding: 12px 32px;
+      border: none;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(67, 206, 162, 0.18);
+      transition: background 0.3s, transform 0.15s;
+    }
+    #newbtn:hover {
+      background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="msg-container">
+    <div class="msg" id="resultMsg"></div>
+    <button id="newbtn">New Game</button>
+  </div>
+  <script>
+    // Get result from URL
+    const params = new URLSearchParams(window.location.search);
+    const result = params.get('result');
+    const winner = params.get('winner');
+    const msgDiv = document.getElementById('resultMsg');
+    if(result === 'draw') {
+      msgDiv.innerText = "Game is a Draw, no winner";
+    } else if(result === 'win' && winner) {
+      msgDiv.innerText = `Congratulations to the winner ${winner}`;
+    } else {
+      msgDiv.innerText = "Game Over";
+    }
+    document.getElementById('newbtn').onclick = () => {
+      window.location.href = "index.html";
+    };
+  </script>
+</body>
+</html>
